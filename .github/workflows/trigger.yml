@@ -1,0 +1,27 @@
+on:
+  # Déclencher sur push et pull request
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+
+  pull_request:
+    branches: [ main ]
+
+  # Déclencher manuellement
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment à déployer'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+
+  # Déclencher selon un schedule
+  schedule:
+    - cron: '0 2 * * *'      # Chaque jour à 2h
+    - cron: '0 0 * * 0'      # Chaque dimanche minuit
